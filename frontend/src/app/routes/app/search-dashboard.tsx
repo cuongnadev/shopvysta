@@ -15,7 +15,7 @@ export const SearchDashboardRouter = () => {
     if (inputRef.current) {
       const query = inputRef.current?.value.trim();
       if (query) {
-        navigate(`search/result?q=${encodeURIComponent(query)}`);
+        navigate(`/search/result?q=${encodeURIComponent(query)}`, { replace: true } );
       }
     }
   };
@@ -50,7 +50,7 @@ export const SearchDashboardRouter = () => {
               className="w-full sm:w-[100px] h-[48px] rounded-[4px] font-bold"
               onClick={search}
             >
-              Find
+              Search
             </Button>
           </div>
         </div>

@@ -9,7 +9,8 @@ export const searchProduct = (q: string) => {
 
 export const useSearchProduct = (q: string) => {
     return useQuery({
-        queryKey: ["search-product"],
+        queryKey: ["search-product", q],
         queryFn: () => searchProduct(q),
+        enabled: !!q,
     });
 };

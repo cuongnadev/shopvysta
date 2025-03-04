@@ -4,7 +4,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { Link } from "../link";
 
 const cardVariants = cva(
-  "relative p-2 overflow-hidden min-w-[170px] max-w-[270px] min-h-[380px] max-h-[420px] rounded-2xl shadow flex flex-col items-center gap-[14px]"
+  "relative bg-white p-2 overflow-hidden min-w-[170px] max-w-[270px] h-[360px] rounded-2xl shadow flex flex-col items-center justify-between gap-[10px] sm:gap-[14px]"
 );
 
 /**
@@ -22,16 +22,16 @@ export type CardProductProps = VariantProps<typeof cardVariants> & {
 export const CardProduct = ({ product, className }: CardProductProps) => {
   return (
     <div className={cardVariants({ className })}>
-          <div className="w-[100%] h-[60%] shadow rounded-2xl flex items-center justify-center">
-            <figure className="w-[100%] h-[100%] rounded-2xl">
-              <img className="w-[100%] h-[100%] rounded-2xl cursor-pointer" src={product?.image ? product.image : "https://media.secretsales.com/catalog/product/2/e/2e866c8d7fa747f5ae9b91ab6bac37a9.jpg"} alt="" />
+          <div className="w-[100%] h-[54%] rounded-2xl flex items-center justify-center">
+            <figure className="w-[100%] h-[100%] shadow rounded-xl flex justify-center">
+              <img className="w-auto h-[100%] rounded-xl cursor-pointer" src={product?.image ? product.image : "https://media.secretsales.com/catalog/product/2/e/2e866c8d7fa747f5ae9b91ab6bac37a9.jpg"} alt="" />
             </figure>
           </div>
 
-          <div className="w-[100%] flex-1 flex flex-col justify-between items-center gap-2">
-            <div className="w-[100%] py-2 flex flex-col justify-center items-start gap-2">
+          <div className="w-[100%] h-[42%] flex flex-col justify-between items-center gap-2">
+            <div className="w-[100%] sm:py-2 flex flex-col justify-center items-start gap-2 flex-grow">
               <Link to={product?.url ? product.url : ""}>
-                <h3 className="text-[16px] text-gray-800 max-h-[48px] line-clamp-2 font-bold cursor-pointer">
+                <h3 className="text-[14px] sm:text-[16px] text-gray-800 h-[42px] sm:h-[48px] line-clamp-2 font-bold cursor-pointer">
                   {product?.title ? product.title : "abc"}
                 </h3>
               </Link>
@@ -40,17 +40,17 @@ export const CardProduct = ({ product, className }: CardProductProps) => {
                   <p className="text-[12px] text-gray-800 font-bold">
                     ${product?.price.value ? product.price.value : "$44.25"}
                   </p>
-                  <p className="text-[10px] text-gray-600 line-through">
+                  <p className="text-[8px] sm:text-[10px] text-gray-600 line-through">
                     ${product?.price.value ? product.price.value : "$44.25"}
                   </p>
                 </div>
-                <span className="block min-w-0 max-w-[120px] h-[24px] py-1 px-3 bg-slate-300 rounded-2xl text-[12px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                <span className="block min-w-0 max-w-[120px] py-[2px] sm:py-1 px-[6px] sm:px-3 bg-slate-300 rounded-2xl text-[10px] sm:text-[12px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
                   {product?.brand ? product.brand : "Beckham"}
                 </span>
               </div>
             </div>
 
-            <Button className="w-[100%] h-[38%] text-[14px] rounded-2xl bg-stone-300 text-stone-800 hover:bg-stone-600 hover:text-stone-50">
+            <Button className="w-[100%] h-[26%] sm:h-[38%] text-[14px] rounded-xl bg-stone-300 text-stone-800 hover:bg-stone-600 hover:text-stone-50">
               Detail »
             </Button>
           </div>

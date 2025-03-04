@@ -19,7 +19,7 @@ export const AppHeader = () => {
     if (inputRef.current) {
       inputRef.current.value = window.location.pathname.includes("result") ? query : "";
     }
-  }, [window.location.pathname]);
+  }, [query]);
 
   //change placeholderplaceholder
   useEffect(() => {
@@ -37,7 +37,7 @@ export const AppHeader = () => {
     if (inputRef.current) {
       const query = inputRef.current?.value.trim();
       if (query) {
-        navigate(`search/result?q=${encodeURIComponent(query)}`);
+        navigate(`/search/result?q=${encodeURIComponent(query)}`, { replace: true } );
       }
     }
   };

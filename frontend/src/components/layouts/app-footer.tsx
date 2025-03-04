@@ -9,7 +9,7 @@
           <Link to="/search/policy">Data Policy</Link>
         </div>
         <span className="text-center sm:text-left">
-          <p>© 2025 wwebsitee.com </p>
+          <p>© 2025 shopvysta.com </p>
         </span>
       </footer>
     );

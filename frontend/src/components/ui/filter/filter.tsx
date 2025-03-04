@@ -40,21 +40,21 @@ export const FilterBox = ({ selected, setSelected }: FilterBoxProps) => {
         <div className="flex flex-wrap lg:flex-nowrap gap-4 w-full">
           {/* Dropdown filters */}
           <SelectSearch
-            options={["Free shipping", "Standard shipping", "Express shipping"]}
+            options={["All shipping cost", "Free shipping"]}
             placeholder="Seller"
             selected={selected}
             setSelected={setSelected}
             className="flex-1 min-w-[200px]"
           />
           <Select
-            options={["Free shipping", "Standard shipping", "Express shipping"]}
+            options={["All shipping cost", "Free shipping"]}
             placeholder="Shipping Cost"
             selected={selected}
             setSelected={setSelected}
             className="flex-1 min-w-[200px]"
           />
           <Select
-            options={["New", "Used", "Refurbished"]}
+            options={["All", "New", "Used", "Refurbished"]}
             placeholder="Condition"
             selected={selected}
             setSelected={setSelected}
