@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import express, { Express } from 'express';
 import env from 'dotenv';
 import 'tsconfig-paths/register';
@@ -11,12 +12,12 @@ env.config();
 connect();
 
 const app: Express = express();
-const PORT: number | string = process.env.PORT || 4425;
+const PORT: number | string = process.env.PORT || 3000;
 
 // app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:3000', // Chỉ định rõ nguồn được phép
-    credentials: true, // Cho phép gửi cookie hoặc authentication headers
+    origin: 'http://localhost:3000', 
+    credentials: true, 
 }));
 
 app.use(bodyParser.json());

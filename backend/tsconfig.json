@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "moduleResolution": "node",
         "baseUrl": "./",
         "esModuleInterop": true,
         "outDir": "dist",
@@ -10,8 +13,7 @@
             "@controllers/*": ["src/controllers/*"],
             "@models/*": ["src/models/*"],
             "@services/*": ["src/services/*"],
-            "@types/*": ["src/types/*"],
-        },
-        "moduleResolution": "node"
+            "@types/*": ["src/types/*"]
+        }
     }
 }
