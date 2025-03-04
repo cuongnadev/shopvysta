@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@layer base {
+  @theme {
+    --font-inter: "Inter", "sans-serif";
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-inter min-[1440px]:max-w-[1540px] mx-auto;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #d0d0d0;
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #bcbcbc;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+}
+
+@layer components {
+  .container {
+    @apply min-[1440px]:max-w-[1440px] mx-auto;
+  }
+
+  .content-container {
+    @apply px-24;
+  }
+}

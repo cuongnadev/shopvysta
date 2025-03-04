@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "paths": {
+            "@routes/*": ["src/routes/*"],
+            "@config/*": ["src/config/*"],
+            "@constant/*": ["src/constant/*"],
+            "@controllers/*": ["src/controllers/*"],
+            "@models/*": ["src/models/*"],
+            "@services/*": ["src/services/*"],
+            "@types/*": ["src/types/*"],
+        },
+        "moduleResolution": "node"
+    }
+}
