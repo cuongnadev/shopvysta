@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r tsconfig-paths/register src/index.ts",
+    "start": "NODE_OPTIONS='--max-old-space-size=4096' nodemon -r tsconfig-paths/register src/index.ts",
     "build": "rimraf dist && tsc",
+    "serve": "node -r tsconfig-paths/register dist/index.js",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"

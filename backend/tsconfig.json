@@ -6,6 +6,7 @@
         "baseUrl": "./",
         "esModuleInterop": true,
         "outDir": "dist",
+        "rootDir": "src",
         "paths": {
             "@routes/*": ["src/routes/*"],
             "@config/*": ["src/config/*"],
