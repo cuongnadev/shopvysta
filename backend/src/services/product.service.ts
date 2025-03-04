@@ -32,46 +32,46 @@ export const syncProducts = async ():Promise<void> => {
 };
 
 export const filteredProducts = async (query: IProductQueryParams) => {
-    const { search, sort, freeShipping, conditions, minPrice, maxPrice } = query;
+    const { q, sort, freeShipping, conditions, minPrice, maxPrice } = query;
 
     const filter: IProductFilter = {};
-    if(search) {
-        filter.title = { $regex: search, $options: 'i' }
-    };
+    if(q) {
+        filter.title = { $regex: q, $options: 'i' }
 
-    if(freeShipping) {
-        filter.freeShipping = freeShipping;
-    };
-
-    if(conditions) {
-        filter.condition = conditions;
-    };
-
-    if (minPrice || maxPrice) {
-        filter.$expr = { $and: [] };
-
-        if (minPrice) {
-            filter.$expr.$and?.push({
-                $gte: [{ $toDouble: "$price.value" }, Number(minPrice)]
-            });
-        }
-
-        if (maxPrice) {
-            filter.$expr.$and?.push({
-                $lte: [{ $toDouble: "$price.value" }, Number(maxPrice)]
-            });
-        }
-
-        if (filter.$expr.$and?.length === 1) {
-            filter.$expr = filter.$expr.$and[0];
-        }
-    }
-
-    const sortQuery: Record<string, SortOrder> = 
-        (sort === 'priceAsc') ? { 'price.value': 1 } : 
-        (sort === 'priceDesc') ? { 'price.value': -1 } : {};
+        if(freeShipping) {
+            filter.freeShipping = freeShipping;
+        };
     
-    return await ProductModel.find(filter).sort(sortQuery);
+        if(conditions) {
+            filter.condition = conditions;
+        };
+    
+        if (minPrice || maxPrice) {
+            filter.$expr = { $and: [] };
+    
+            if (minPrice) {
+                filter.$expr.$and?.push({
+                    $gte: [{ $toDouble: "$price.value" }, Number(minPrice)]
+                });
+            }
+    
+            if (maxPrice) {
+                filter.$expr.$and?.push({
+                    $lte: [{ $toDouble: "$price.value" }, Number(maxPrice)]
+                });
+            }
+    
+            if (filter.$expr.$and?.length === 1) {
+                filter.$expr = filter.$expr.$and[0];
+            }
+        }
+    
+        const sortQuery: Record<string, SortOrder> = 
+            (sort === 'priceAsc') ? { 'price.value': 1 } : 
+            (sort === 'priceDesc') ? { 'price.value': -1 } : {};
+
+        return await ProductModel.find(filter).sort(sortQuery);
+    };
 };
 
 export function addProduct(product: IProduct) {

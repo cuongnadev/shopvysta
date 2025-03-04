@@ -18,7 +18,7 @@ export interface IProduct {
 }
 
 export interface IProductQueryParams {
-    search?: string;
+    q?: string;
     sort?: 'priceAsc' | 'priceDesc';
     freeShipping?: boolean;
     conditions?: string;

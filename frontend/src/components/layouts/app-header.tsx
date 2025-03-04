@@ -4,6 +4,7 @@ import { Input, Button } from "../ui";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SelectCountry } from "../ui";
 import { Link } from "../ui";
+import { LocalImage } from "src/assets/local-images";
 
 export const AppHeader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -44,9 +45,9 @@ export const AppHeader = () => {
   return (
     <header className="flex flex-col px-[16px] pb-4">
       <div className="flex justify-between items-center h-[60px]">
-        <Link to="/" className="flex">
-          <LocalIcon iconName="logo_icon" />
-          <span className="font-bold">WWEBSITEE</span>
+        <Link to="/" className="flex items-center">
+          <LocalImage name="logo" height={40} width={40} className="pr-2"/>
+          <span className="font-bold">SHOPVYSTA</span>
         </Link>
         <div className="flex items-center gap-[20px]">
           <button onClick={() => setIsSearchVisible(!isSearchVisible)}>

@@ -13,7 +13,11 @@ connect();
 const app: Express = express();
 const PORT: number | string = process.env.PORT || 4425;
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // Chỉ định rõ nguồn được phép
+    credentials: true, // Cho phép gửi cookie hoặc authentication headers
+}));
 
 app.use(bodyParser.json());
 

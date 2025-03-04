@@ -1,19 +1,18 @@
-import { CardProduct } from "src/components/ui";
 import { FilterBox } from "src/components/ui/filter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-let test: number[] = Array.from({ length: 20 }, (_, i) => i + 1);
+import { useSearchProduct } from "src/api/search";
+import { CardProduct } from "src/components/ui";
+import { ProductProps } from "src/types/product";
 
 export const SearchResultRouter = () => {
   const [selected, setSelected] = useState("");
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
 
-  useEffect(() => {
-    console.log(selected);
-    console.log(query);
-  }, [selected]);
+  const { data, isLoading } = useSearchProduct(query);
+
+  const products = data?.data as ProductProps[];
 
   return (
     <>
@@ -22,12 +21,9 @@ export const SearchResultRouter = () => {
         setSelected={setSelected}
       />
       <div className="grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(170px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] justify-center gap-2 sm:gap-5 w-full">
-        {test.map((t, index) => (
-          <CardProduct
-            key={index}
-            product={t}
-          />
-        ))}
+        { isLoading ? "abc" : products.map((product: ProductProps, index) => (
+          <CardProduct product={product} key={index}/>
+        )) }
       </div>
     </>
   );

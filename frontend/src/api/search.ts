@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 
 import { ProductProps } from "src/types/product";
 
-export const searchProduct = () => {
-    return apiClient.get<ProductProps>("candidate/contact");
+export const searchProduct = (q: string) => {
+    return apiClient.get<ProductProps[]>(`/search?q=${q}`);
 };
 
-export const useSearchProduct = () => {
+export const useSearchProduct = (q: string) => {
     return useQuery({
         queryKey: ["search-product"],
-        queryFn: searchProduct,
+        queryFn: () => searchProduct(q),
     });
 };

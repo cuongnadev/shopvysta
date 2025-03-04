@@ -13,9 +13,9 @@ export const syncProductsController = async (req: Request, res: Response) => {
 };
 
 export const filteredProductsController = async (req: Request, res: Response) => {
-    const { search, sort, freeShipping, conditions, minPrice, maxPrice } = req.query;
+    const { q } = req.query;
 
-    if (!search && !sort && !freeShipping && !conditions && !minPrice && !maxPrice) {
+    if (!q) {
         res.status(400).json({ message: "Invalid or missing query parameters. Please provide at least one valid query parameter." });
         return;
     };
@@ -24,7 +24,7 @@ export const filteredProductsController = async (req: Request, res: Response) =>
         const products = await filteredProducts(req.query);
         console.log(products.length);
         
-        res.status(200).json({ success: true, products: products });
+        res.status(200).json({ success: true, data: products });
     } catch(error) {
         res.status(500).json({ error: 'Filtered Products Failed!' });
     };
