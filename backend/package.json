@@ -4,10 +4,19 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -r tsconfig-paths/register src/index.ts",
-    "build": "rm -rf dist && tsc",
+    "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "_moduleAliases": {
+    "@routes": "./dist/routes",
+    "@config": "./dist/config",
+    "@constant": "./dist/constant",
+    "@controllers": "./dist/controllers",
+    "@models": "./dist/models",
+    "@services": "./dist/services",
+    "@types": "./dist/types"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +30,9 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "googleapis": "^144.0.0",
+    "module-alias": "^2.2.3",
     "mongoose": "^8.10.1",
+    "rimraf": "^6.0.1",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
@@ -30,7 +41,6 @@
     "@types/node": "^22.13.4",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.1",
-    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
