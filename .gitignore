@@ -25,4 +25,4 @@ dist-ssr
 backend/service-account.json
 
 *storybook.log
-backend/.env
+**/.env
