@@ -2,22 +2,64 @@ import { useState } from "react";
 import { Button } from "../button";
 import { LocalIcon } from "src/assets/local-icon";
 import { Input, Select, SelectTransparent, SelectSearch } from "../input";
+import { ProductProps } from "src/types/product";
 
 type FilterBoxProps = {
-  selected: string;
-  setSelected: (value: string) => void;
+  data: ProductProps[];
+  selectedFilters: Record<string, string>;
+  setSelectedFilters: (filters: Record<string, string>) => void;
 };
 
-export const FilterBox = ({ selected, setSelected }: FilterBoxProps) => {
+export const FilterBox = ({ data, selectedFilters, setSelectedFilters }: FilterBoxProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const brands = [... new Set(data.map((product) => product.brand) as string[])];
+
+  const handleChangeFiltered = (key: string, value: string) => {
+    const newFilters = { ...selectedFilters };
+    if(key === "freeShipping") {
+      if(value === "Free shipping") {
+        newFilters[key] = "true";
+      } else {
+        delete newFilters[key];
+      }
+    } else if(key === "condition") {
+      if(value !== "All") {
+        newFilters[key] = value;
+      } else {
+        delete newFilters[key];
+      }
+    } else {
+      newFilters[key] = value;
+    }
+    setSelectedFilters({...newFilters});
+  };
+
+  const handleApplyPrice = () => {
+    const newFilters = { ...selectedFilters };
+
+    if(minPrice) {
+      newFilters["minPrice"] = minPrice.toString();
+    } else {
+      delete newFilters["minPrice"];
+    }
+
+    if(maxPrice) {
+      newFilters["maxPrice"] = maxPrice.toString();
+    } else {
+      delete newFilters["maxPrice"];
+    }
+    setSelectedFilters({...newFilters});
+  }
 
   return (
     <div className="flex flex-col w-full rounded-[6px] bg-white px-4 sm:px-6">
       {/* Header */}
       <div className="flex z-[11] justify-between items-center pt-[10px]">
         <SelectTransparent
-          selected={selected}
-          setSelected={setSelected}
+          selected={selectedFilters}
+          setSelected={handleChangeFiltered}
         />
         <Button
           variant="transparent"
@@ -40,24 +82,27 @@ export const FilterBox = ({ selected, setSelected }: FilterBoxProps) => {
         <div className="flex flex-wrap lg:flex-nowrap gap-4 w-full">
           {/* Dropdown filters */}
           <SelectSearch
-            options={["All shipping cost", "Free shipping"]}
+            options={brands}
             placeholder="Seller"
-            selected={selected}
-            setSelected={setSelected}
+            name="brand"
+            selected={selectedFilters}
+            setSelected={handleChangeFiltered}
             className="flex-1 min-w-[200px]"
           />
           <Select
             options={["All shipping cost", "Free shipping"]}
             placeholder="Shipping Cost"
-            selected={selected}
-            setSelected={setSelected}
+            name="freeShipping"
+            selected={selectedFilters}
+            setSelected={handleChangeFiltered}
             className="flex-1 min-w-[200px]"
           />
           <Select
-            options={["All", "New", "Used", "Refurbished"]}
+            options={["All", "New", "Used"]}
             placeholder="Condition"
-            selected={selected}
-            setSelected={setSelected}
+            name="condition"
+            selected={selectedFilters}
+            setSelected={handleChangeFiltered}
             className="flex-1 min-w-[200px]"
           />
 
@@ -66,12 +111,16 @@ export const FilterBox = ({ selected, setSelected }: FilterBoxProps) => {
             <Input
               placeholder="Min price"
               containerClass="flex-1 min-w-[90px] h-[36.5px]"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
             />
             <Input
               placeholder="Max price"
               containerClass="flex-1 min-w-[90px] h-[36.5px]"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
             />
-            <Button className="h-[36.5px] w-full sm:w-auto">Filter</Button>
+            <Button className="h-[36.5px] w-full sm:w-auto" onClick={handleApplyPrice}>Filter</Button>
           </div>
         </div>
       </div>

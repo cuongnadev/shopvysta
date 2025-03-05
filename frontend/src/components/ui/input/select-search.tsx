@@ -4,12 +4,13 @@ import { LocalIcon } from "src/assets/local-icon";
 type SelectSearchProps = {
     options: string[];
     placeholder: string;
-    selected: string;
-    setSelected: (value: string) => void;
+    name: string;
+    selected: Record<string, string>;
+    setSelected: (key: string, value: string) => void;
     className?: string; 
 };
 
-export const SelectSearch = ({ options, placeholder, setSelected, className }: SelectSearchProps) => {
+export const SelectSearch = ({ options, placeholder, name, setSelected, className }: SelectSearchProps) => {
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const selectRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +58,7 @@ export const SelectSearch = ({ options, placeholder, setSelected, className }: S
                                 className="px-4 py-2 cursor-pointer hover:bg-gray-200"
                                 onClick={() => {
                                     setSearch(item);
-                                    setSelected(item);
+                                    setSelected(name, item);
                                     setOpen(false);
                                 }}
                             >

@@ -5,17 +5,28 @@ import { useSearchProduct } from "src/api/search";
 import { CardProduct } from "src/components/ui";
 import { ProductProps } from "src/types/product";
 import { gif_infinite } from "src/assets";
+import { useFilterProduct } from "src/api/filter";
 
 export const SearchResultRouter = () => {
-  const [selected, setSelected] = useState("");
+  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({});
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
+  
   const { data, isLoading } = useSearchProduct(query);
-  const [gridClass, setGridClass] = useState(
-    "sm:grid-cols-[repeat(auto-fit,minmax(170px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
-  );
+  const { data: filteredData } = useFilterProduct(query, selectedFilters);
 
-  const products = data?.data as ProductProps[];
+  useEffect(() => {
+    if (data?.data) {
+      setProducts(data.data as ProductProps[]);
+    }
+  }, [data]); 
+
+  useEffect(() => {
+    if (filteredData?.data) {
+      setProducts(filteredData.data as ProductProps[]);
+    }
+  }, [filteredData]);
 
   useEffect(() => {
     const updateGrid = () => {
@@ -30,16 +41,21 @@ export const SearchResultRouter = () => {
       }
     };
 
-    updateGrid(); // Cập nhật ngay khi component mount
+    updateGrid();
     window.addEventListener("resize", updateGrid);
     return () => window.removeEventListener("resize", updateGrid);
   }, [products]);
 
+  const [gridClass, setGridClass] = useState(
+    "sm:grid-cols-[repeat(auto-fit,minmax(170px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
+  );
+
   return (
     <>
       <FilterBox
-        selected={selected}
-        setSelected={setSelected}
+        data={products}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
       />
       <div
         className={`grid grid-cols-2 ${gridClass} justify-start gap-2 sm:gap-5 w-full`}

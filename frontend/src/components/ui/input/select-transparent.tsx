@@ -3,12 +3,12 @@ import { LocalIcon } from "src/assets/local-icon";
 
 type OptionType = "relevance" | "lowest price" | "highest price";
 type SelectTransparentProps = {
-    selected: string;
-    setSelected: (value: string) => void;
+    selected: Record<string, string>;
+    setSelected: (key: string, value: string) => void;
 }
 const options: OptionType[] = ["relevance", "lowest price", "highest price"];
 
-export const SelectTransparent = ({setSelected }: SelectTransparentProps) => {
+export const SelectTransparent = ({ setSelected }: SelectTransparentProps) => {
     const [open, setOpen] = useState(false);
     const [select, setSelectItem] = useState<OptionType>("relevance");
     const selectRef = useRef<HTMLDivElement | null>(null);
@@ -44,7 +44,7 @@ export const SelectTransparent = ({setSelected }: SelectTransparentProps) => {
                                 checked={select === option} 
                                 onChange={() => {
                                     setSelectItem(option);
-                                    setSelected(option)
+                                    setSelected("sort", option);
                                     setOpen(false);
                                 }}
                                 className="mr-2"

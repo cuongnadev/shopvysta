@@ -4,12 +4,13 @@ import { LocalIcon } from "src/assets/local-icon";
 type SelectProps = {
     options: string[];
     placeholder: string;
-    selected: string;
-    setSelected: (value: string) => void;
+    name: string;
+    selected: Record<string, string>;
+    setSelected: (key: string, value: string) => void;
     className?: string;
 };
 
-export const Select = ({ options, placeholder, setSelected, className }: SelectProps) => {
+export const Select = ({ options, placeholder, name, setSelected, className }: SelectProps) => {
   const [open, setOpen] = useState(false);
   const [select, setSelectItem] = useState("");
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -69,7 +70,7 @@ export const Select = ({ options, placeholder, setSelected, className }: SelectP
                 checked={select === item}
                 onChange={() => {
                   setSelectItem(item);
-                  setSelected(item);
+                  setSelected(name, item);
                   setOpen(false);
                 }}
                 className="mr-2"
