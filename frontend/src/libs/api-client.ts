@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:4425/api/v1/products",
+  baseURL: "https://shopvysta.onrender.com/api/v1/products",
   withCredentials: true,
 });
 
