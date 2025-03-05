@@ -30,6 +30,14 @@ export const FilterBox = ({ data, selectedFilters, setSelectedFilters }: FilterB
       } else {
         delete newFilters[key];
       }
+    } else if(key === "sort") {
+      if(value === "lowest price") {
+        newFilters[key] = "priceAsc";
+      } else if(value === "highest price") {
+        newFilters[key] = "priceDesc";
+      } else {
+        delete newFilters[key];
+      }
     } else {
       newFilters[key] = value;
     }
@@ -113,12 +121,14 @@ export const FilterBox = ({ data, selectedFilters, setSelectedFilters }: FilterB
               containerClass="flex-1 min-w-[90px] h-[36.5px]"
               value={minPrice}
               onChange={(e) => setMinPrice(e.target.value)}
+              className="text-[14px]"
             />
             <Input
               placeholder="Max price"
               containerClass="flex-1 min-w-[90px] h-[36.5px]"
               value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
+              className="text-[14px]"
             />
             <Button className="h-[36.5px] w-full sm:w-auto" onClick={handleApplyPrice}>Filter</Button>
           </div>
