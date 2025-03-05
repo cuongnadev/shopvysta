@@ -14,12 +14,12 @@ export const syncProductsController = async (req: Request, res: Response) => {
 
 export const filteredProductsController = async (req: Request, res: Response) => {
     const { q } = req.query;
-
+    
     if (!q) {
         res.status(400).json({ message: "Invalid or missing query parameters. Please provide at least one valid query parameter." });
         return;
     };
-    
+
     try {
         const products = await filteredProducts(req.query);
         console.log(products.length);

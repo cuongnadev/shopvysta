@@ -13,14 +13,14 @@ export interface IProduct {
         currency: string;
     };
     condition: string;
-    isSale: Boolean,
-    freeShipping: Boolean
+    isSale: boolean,
+    freeShipping: boolean
 }
 
 export interface IProductQueryParams {
     q?: string;
     sort?: 'priceAsc' | 'priceDesc';
-    freeShipping?: boolean;
+    freeShipping?: true | false | 'true' | 'false';
     condition?: string;
     minPrice?: string;
     maxPrice?: string;
@@ -29,7 +29,7 @@ export interface IProductQueryParams {
 
 export interface IProductFilter {
     title?: { $regex: string; $options: string };
-    freeShipping?: boolean;
+    freeShipping?: true | false;
     condition?: { $regex: string; $options: string };
     $expr?: {
         $and?: Array<{ $gte?: [ { $toDouble: string }, number ] } | { $lte?: [ { $toDouble: string }, number ] }>;

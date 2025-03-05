@@ -1,4 +1,3 @@
-import { contentApi, merchantId } from '@config/googleAuth';
 import { fetchAllProducts } from '@config/fetchData';
 import {
     IProduct,
@@ -6,7 +5,6 @@ import {
     IProductQueryParams,
 } from '../types/product.type';
 import ProductModel from '@models/product.model';
-import { SortOrder } from 'mongoose';
 
 export const syncProducts = async (): Promise<void> => {
     try {
@@ -42,13 +40,15 @@ export const syncProducts = async (): Promise<void> => {
 export const filteredProducts = async (query: IProductQueryParams) => {
     const { q, sort, freeShipping, condition, minPrice, maxPrice, brand } = query;
 
+    console.log('Type of freeShipping:', typeof freeShipping, freeShipping);
+
     const filter: IProductFilter = {};
     if (q) {
         filter.title = { $regex: q, $options: 'i' };
 
-        if (freeShipping) {
-            filter.freeShipping = freeShipping;
-        }
+        if (freeShipping !== undefined) {
+            filter.freeShipping = freeShipping === 'true' || freeShipping === true ? true : false;
+        }        
 
         if (condition) {
             filter.condition = { $regex: condition, $options: 'i' };
@@ -66,6 +66,9 @@ export const filteredProducts = async (query: IProductQueryParams) => {
                 },
             },
         ];
+
+        console.log(pipeline);
+        
 
         if (minPrice || maxPrice) {
             const priceFilter: any = {};
