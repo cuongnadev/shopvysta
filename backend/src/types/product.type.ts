@@ -21,7 +21,7 @@ export interface IProductQueryParams {
     q?: string;
     sort?: 'priceAsc' | 'priceDesc';
     freeShipping?: boolean;
-    conditions?: string;
+    condition?: string;
     minPrice?: string;
     maxPrice?: string;
     brand?: string
@@ -30,13 +30,13 @@ export interface IProductQueryParams {
 export interface IProductFilter {
     title?: { $regex: string; $options: string };
     freeShipping?: boolean;
-    condition?: string;
-    brand?: string;
+    condition?: { $regex: string; $options: string };
     $expr?: {
         $and?: Array<{ $gte?: [ { $toDouble: string }, number ] } | { $lte?: [ { $toDouble: string }, number ] }>;
     } | { 
         $gte?: [ { $toDouble: string }, number ]; 
         $lte?: [ { $toDouble: string }, number ]; 
     };
+    brand?: string;
 }
 

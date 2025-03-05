@@ -38,6 +38,12 @@ export const FilterBox = ({ data, selectedFilters, setSelectedFilters }: FilterB
       } else {
         delete newFilters[key];
       }
+    } else if(key === "brand") {
+      if(value !== "All") {
+        newFilters[key] = value;
+      } else {
+        delete newFilters[key];
+      }
     } else {
       newFilters[key] = value;
     }
@@ -73,7 +79,7 @@ export const FilterBox = ({ data, selectedFilters, setSelectedFilters }: FilterB
           variant="transparent"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <LocalIcon iconName="filter_icon" />
+          <LocalIcon iconName="filter_icon" height={20} width={20} />
           <span>Filter</span>
         </Button>
       </div>

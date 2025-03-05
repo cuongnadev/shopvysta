@@ -30,9 +30,9 @@ export const SelectSearch = ({ options, placeholder, name, setSelected, classNam
     }, []);
 
     // Filter options based on search input
-    const filteredOptions = options.filter(option =>
+    const filteredOptions = ["All", ...options.filter(option => option !== "All")].filter(option =>
         option.toLowerCase().includes(search.toLowerCase())
-    );
+    );    
 
     return (
         <div ref={selectRef} className={`relative w-64 flex-1 ${className || ""}`}>

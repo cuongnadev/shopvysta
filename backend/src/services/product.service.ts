@@ -40,7 +40,7 @@ export const syncProducts = async (): Promise<void> => {
 };
 
 export const filteredProducts = async (query: IProductQueryParams) => {
-    const { q, sort, freeShipping, conditions, minPrice, maxPrice, brand } = query;
+    const { q, sort, freeShipping, condition, minPrice, maxPrice, brand } = query;
 
     const filter: IProductFilter = {};
     if (q) {
@@ -50,8 +50,8 @@ export const filteredProducts = async (query: IProductQueryParams) => {
             filter.freeShipping = freeShipping;
         }
 
-        if (conditions) {
-            filter.condition = conditions;
+        if (condition) {
+            filter.condition = { $regex: condition, $options: 'i' };
         }
 
         if(brand) {
