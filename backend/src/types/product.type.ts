@@ -24,12 +24,14 @@ export interface IProductQueryParams {
     conditions?: string;
     minPrice?: string;
     maxPrice?: string;
+    brand?: string
 }
 
 export interface IProductFilter {
     title?: { $regex: string; $options: string };
     freeShipping?: boolean;
     condition?: string;
+    brand?: string;
     $expr?: {
         $and?: Array<{ $gte?: [ { $toDouble: string }, number ] } | { $lte?: [ { $toDouble: string }, number ] }>;
     } | { 

@@ -40,7 +40,7 @@ export const syncProducts = async (): Promise<void> => {
 };
 
 export const filteredProducts = async (query: IProductQueryParams) => {
-    const { q, sort, freeShipping, conditions, minPrice, maxPrice } = query;
+    const { q, sort, freeShipping, conditions, minPrice, maxPrice, brand } = query;
 
     const filter: IProductFilter = {};
     if (q) {
@@ -52,6 +52,10 @@ export const filteredProducts = async (query: IProductQueryParams) => {
 
         if (conditions) {
             filter.condition = conditions;
+        }
+
+        if(brand) {
+            filter.brand = brand;
         }
 
         const pipeline: any[] = [

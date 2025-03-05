@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_OPTIONS='--max-old-space-size=4096' nodemon -r tsconfig-paths/register src/index.ts",
+    "start": "set NODE_OPTIONS=--max-old-space-size=4096 && nodemon -r tsconfig-paths/register src/index.ts",
     "build": "rimraf dist && tsc",
     "serve": "node -r tsconfig-paths/register dist/index.js",
     "ts.check": "tsc --project tsconfig.json",
