@@ -16,8 +16,8 @@ const PORT: number | string = process.env.PORT || 3000;
 
 // app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:3000', 
-    credentials: true, 
+    origin: ['http://localhost:3000', 'https://shopvysta.vercel.app'],
+    credentials: true,
 }));
 
 app.use(bodyParser.json());
