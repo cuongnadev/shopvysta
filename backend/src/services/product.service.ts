@@ -54,12 +54,11 @@ export const filteredProducts = async (query: IProductQueryParams) => {
             filter.condition = conditions;
         }
 
-        // Tạo pipeline cho aggregation
         const pipeline: any[] = [
             { $match: filter },
             {
                 $addFields: {
-                    priceValue: { $toDouble: '$price.value' }, // Convert price.value từ string -> number
+                    priceValue: { $toDouble: '$price.value' },
                 },
             },
         ];
@@ -72,7 +71,6 @@ export const filteredProducts = async (query: IProductQueryParams) => {
             pipeline.push({ $match: { priceValue: priceFilter } });
         }
 
-        // Áp dụng sắp xếp nếu có
         if (sort === 'priceAsc') {
             pipeline.push({ $sort: { priceValue: 1 } });
         } else if (sort === 'priceDesc') {
